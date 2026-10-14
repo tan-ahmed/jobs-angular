@@ -1,6 +1,10 @@
-import { Component, inject, signal } from '@angular/core';
+import { ViewportScroller, isPlatformBrowser } from '@angular/common';
+import { Component, Injector, PLATFORM_ID, afterNextRender, inject, signal } from '@angular/core';
 import { email, form, FormField, required, submit } from '@angular/forms/signals';
 import { RouterLink } from '@angular/router';
+
+import { NgIcon, provideIcons } from '@ng-icons/core';
+import { lucidePlus } from '@ng-icons/lucide';
 
 import { ZardAlertComponent } from '@/shared/components/alert';
 import { ZardButtonComponent } from '@/shared/components/button';
@@ -23,6 +27,7 @@ interface JobAlertFormModel {
   selector: 'app-get-job-alerts',
   imports: [
     FormField,
+    NgIcon,
     RouterLink,
     ZardAlertComponent,
     ZardButtonComponent,
@@ -30,10 +35,14 @@ interface JobAlertFormModel {
     ...ZardFieldImports,
     ...ZardSelectImports,
   ],
+  viewProviders: [provideIcons({ lucidePlus })],
   templateUrl: './get-job-alerts.html',
 })
 export class GetJobAlerts {
   private readonly jobAlerts = inject(JobAlertsService);
+  private readonly viewport = inject(ViewportScroller);
+  private readonly platformId = inject(PLATFORM_ID);
+  private readonly injector = inject(Injector);
 
   protected readonly radiusOptions = [
     '5',
@@ -80,6 +89,7 @@ export class GetJobAlerts {
       this.jobAlerts.create(this.alertModel());
       this.submitting.set(false);
       this.submitted.set(true);
+      this.scrollToTop();
     });
   }
 
@@ -93,5 +103,19 @@ export class GetJobAlerts {
       frequency: 'daily',
     });
     this.submitted.set(false);
+    this.scrollToTop();
+  }
+
+  private scrollToTop(): void {
+    if (!isPlatformBrowser(this.platformId)) {
+      return;
+    }
+
+    afterNextRender(
+      () => {
+        this.viewport.scrollToPosition([0, 0]);
+      },
+      { injector: this.injector },
+    );
   }
 }

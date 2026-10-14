@@ -40,9 +40,10 @@
           {{ alerts().length }} alert{{ alerts().length === 1 ? '' : 's' }}
         </p>
         <a
-          class="text-sm font-medium text-link underline-offset-2 hover:underline"
+          class="inline-flex items-center gap-1 text-sm font-medium text-link underline-offset-2 hover:underline"
           routerLink="/get-job-alerts"
         >
+          <ng-icon name="lucidePlus" class="size-4" />
           Create another
         </a>
       </div>

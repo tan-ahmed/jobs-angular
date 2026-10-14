@@ -23,13 +23,14 @@
           <z-alert
             zType="success"
             zRole="status"
-            zTitle="Thanks — your job alert has been created."
+            zTitle="Thanks, your job alert has been created."
             zDescription="We’ll email you jobs that match your criteria. You can change or delete this alert anytime."
           />
 
           <div class="flex flex-col gap-3 sm:flex-row sm:flex-wrap">
             <a z-button routerLink="/get-job-alerts/manage">Manage your alerts</a>
             <button z-button zType="outline" type="button" (click)="createAnother()">
+              <ng-icon name="lucidePlus" />
               Create another alert
             </button>
           </div>

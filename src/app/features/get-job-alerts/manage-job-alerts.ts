@@ -2,6 +2,9 @@ import { DatePipe } from '@angular/common';
 import { Component, computed, inject, signal } from '@angular/core';
 import { RouterLink } from '@angular/router';
 
+import { NgIcon, provideIcons } from '@ng-icons/core';
+import { lucidePlus } from '@ng-icons/lucide';
+
 import { ZardAlertComponent } from '@/shared/components/alert';
 import { ZardAlertDialogImports } from '@/shared/components/alert-dialog';
 import { ZardButtonComponent } from '@/shared/components/button';
@@ -14,12 +17,14 @@ import { JobAlertsService, fakeNetworkDelay } from './job-alerts.service';
   selector: 'app-manage-job-alerts',
   imports: [
     DatePipe,
+    NgIcon,
     RouterLink,
     ZardAlertComponent,
     ZardButtonComponent,
     ZardSkeletonComponent,
     ...ZardAlertDialogImports,
   ],
+  viewProviders: [provideIcons({ lucidePlus })],
   templateUrl: './manage-job-alerts.html',
 })
 export class ManageJobAlerts {
