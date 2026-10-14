@@ -1,0 +1,65 @@
+<main class="bg-background">
+  <div class="mx-auto w-full max-w-lg px-4 py-8 sm:px-6 sm:py-12 lg:py-16">
+    <header class="mb-6 space-y-2 sm:mb-8">
+      <p class="text-sm font-semibold tracking-widest text-primary uppercase">Jobs by email</p>
+      <h1 class="font-serif text-3xl font-semibold tracking-tight text-balance sm:text-4xl">
+        Unsubscribe from this alert
+      </h1>
+    </header>
+
+    <div class="rounded-2xl border border-border bg-card p-5 text-card-foreground shadow-sm sm:p-8">
+      @if (done()) {
+        <z-alert
+          zType="success"
+          zRole="status"
+          zTitle="You’re unsubscribed"
+          zDescription="You won’t receive emails for this job alert anymore."
+        />
+        <div class="mt-6 flex flex-wrap gap-2">
+          <a z-button routerLink="/get-job-alerts/manage">Manage alerts</a>
+          <a z-button zType="outline" routerLink="/get-job-alerts">Create a new alert</a>
+        </div>
+      } @else if (missing()) {
+        <z-alert
+          zType="destructive"
+          zTitle="Alert not found"
+          zDescription="We couldn’t find that alert. It may already have been deleted."
+        />
+        <a z-button class="mt-6" routerLink="/get-job-alerts/manage">Manage alerts</a>
+      } @else if (alert(); as current) {
+        <p class="text-pretty">Are you sure you want to delete this alert?</p>
+        <dl class="mt-4 space-y-2 text-sm">
+          <div>
+            <dt class="text-muted-foreground">Email</dt>
+            <dd class="font-medium">{{ current.email }}</dd>
+          </div>
+          <div>
+            <dt class="text-muted-foreground">Criteria</dt>
+            <dd class="font-medium text-pretty">
+              {{ current.jobTitle || 'Any job title' }}
+              @if (current.location) {
+                · {{ current.location }}
+                @if (current.searchRadius) {
+                  (within {{ current.searchRadius }} miles)
+                }
+              }
+            </dd>
+          </div>
+        </dl>
+        <div class="mt-6 flex flex-wrap gap-2">
+          <button
+            z-button
+            zType="destructive"
+            type="button"
+            [zLoading]="submitting()"
+            [zDisabled]="submitting()"
+            (click)="confirmUnsubscribe()"
+          >
+            Unsubscribe
+          </button>
+          <a z-button zType="outline" routerLink="/get-job-alerts/manage">Cancel</a>
+        </div>
+      }
+    </div>
+  </div>
+</main>

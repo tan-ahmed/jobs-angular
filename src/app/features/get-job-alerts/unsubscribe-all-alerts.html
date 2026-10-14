@@ -1,0 +1,53 @@
+<main class="bg-background">
+  <div class="mx-auto w-full max-w-lg px-4 py-8 sm:px-6 sm:py-12 lg:py-16">
+    <header class="mb-6 space-y-2 sm:mb-8">
+      <p class="text-sm font-semibold tracking-widest text-primary uppercase">Jobs by email</p>
+      <h1 class="font-serif text-3xl font-semibold tracking-tight text-balance sm:text-4xl">
+        Unsubscribe from all alerts
+      </h1>
+    </header>
+
+    <div class="rounded-2xl border border-border bg-card p-5 text-card-foreground shadow-sm sm:p-8">
+      @if (done()) {
+        <z-alert
+          zType="success"
+          zRole="status"
+          zTitle="You’re unsubscribed from all alerts"
+          zDescription="You won’t receive any further jobs-by-email messages."
+        />
+        <div class="mt-6 flex flex-wrap gap-2">
+          <a z-button routerLink="/get-job-alerts">Create a job alert</a>
+          <a z-button zType="outline" routerLink="/">Back to home</a>
+        </div>
+      } @else if (alertCount() === 0) {
+        <z-alert
+          zIcon="lucideInfo"
+          zTitle="No alerts to unsubscribe"
+          zDescription="There are no job alerts to unsubscribe from."
+        />
+        <a z-button class="mt-6" routerLink="/get-job-alerts">Create a job alert</a>
+      } @else {
+        <p class="text-pretty">
+          Are you sure you want to unsubscribe from all
+          {{ alertCount() }} job alert{{ alertCount() === 1 ? '' : 's' }}?
+        </p>
+        <p class="mt-2 text-sm text-muted-foreground text-pretty">
+          This removes every alert. You can create new ones anytime.
+        </p>
+        <div class="mt-6 flex flex-wrap gap-2">
+          <button
+            z-button
+            zType="destructive"
+            type="button"
+            [zLoading]="submitting()"
+            [zDisabled]="submitting()"
+            (click)="confirmUnsubscribeAll()"
+          >
+            Unsubscribe from all
+          </button>
+          <a z-button zType="outline" routerLink="/get-job-alerts/manage">Cancel</a>
+        </div>
+      }
+    </div>
+  </div>
+</main>
