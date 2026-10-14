@@ -1,9 +1,18 @@
-import { NgOptimizedImage } from '@angular/common';
-import { Component, signal } from '@angular/core';
-import { RouterLink, RouterLinkActive } from '@angular/router';
+import { NgOptimizedImage, isPlatformBrowser } from '@angular/common';
+import {
+  Component,
+  DestroyRef,
+  PLATFORM_ID,
+  effect,
+  inject,
+  signal,
+} from '@angular/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { NavigationEnd, Router, RouterLink, RouterLinkActive } from '@angular/router';
 
 import { NgIcon, provideIcons } from '@ng-icons/core';
 import { lucideMenu, lucideUserRound, lucideX } from '@ng-icons/lucide';
+import { filter } from 'rxjs';
 
 import { ZardButtonComponent } from '@/shared/components/button';
 
@@ -22,8 +31,34 @@ const NAV_ITEMS = [
   templateUrl: './site-header.html',
 })
 export class SiteHeader {
+  private readonly platformId = inject(PLATFORM_ID);
+  private readonly destroyRef = inject(DestroyRef);
+  private readonly router = inject(Router);
+
   protected readonly navItems = NAV_ITEMS;
   protected readonly menuOpen = signal(false);
+
+  constructor() {
+    effect(() => {
+      if (!isPlatformBrowser(this.platformId)) {
+        return;
+      }
+      document.body.style.overflow = this.menuOpen() ? 'hidden' : '';
+    });
+
+    this.destroyRef.onDestroy(() => {
+      if (isPlatformBrowser(this.platformId)) {
+        document.body.style.overflow = '';
+      }
+    });
+
+    this.router.events
+      .pipe(
+        filter(event => event instanceof NavigationEnd),
+        takeUntilDestroyed(),
+      )
+      .subscribe(() => this.closeMenu());
+  }
 
   protected toggleMenu(): void {
     this.menuOpen.update(open => !open);
