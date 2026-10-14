@@ -64,6 +64,7 @@ export class GetJobAlerts {
 
   protected readonly submitting = signal(false);
   protected readonly submitted = signal(false);
+  protected readonly showValidationHint = signal(false);
 
   protected readonly alertModel = signal<JobAlertFormModel>({
     email: '',
@@ -82,14 +83,21 @@ export class GetJobAlerts {
   protected onSubmit(event: Event): void {
     event.preventDefault();
     this.submitted.set(false);
+    this.showValidationHint.set(false);
 
-    void submit(this.alertForm, async () => {
-      this.submitting.set(true);
-      await fakeNetworkDelay();
-      this.jobAlerts.create(this.alertModel());
-      this.submitting.set(false);
-      this.submitted.set(true);
-      this.scrollToTop();
+    void submit(this.alertForm, {
+      action: async () => {
+        this.submitting.set(true);
+        await fakeNetworkDelay();
+        this.jobAlerts.create(this.alertModel());
+        this.submitting.set(false);
+        this.submitted.set(true);
+        this.scrollToTop();
+      },
+      onInvalid: () => {
+        this.showValidationHint.set(true);
+        this.focusFirstInvalidField();
+      },
     });
   }
 
@@ -103,7 +111,35 @@ export class GetJobAlerts {
       frequency: 'daily',
     });
     this.submitted.set(false);
+    this.showValidationHint.set(false);
     this.scrollToTop();
+  }
+
+  private focusFirstInvalidField(): void {
+    if (!isPlatformBrowser(this.platformId)) {
+      return;
+    }
+
+    afterNextRender(
+      () => {
+        document
+          .getElementById('form-validation-alert')
+          ?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+
+        const targetId = this.alertForm.email().invalid()
+          ? 'email'
+          : this.alertForm.frequency().invalid()
+            ? 'frequency-daily'
+            : null;
+
+        if (!targetId) {
+          return;
+        }
+
+        document.getElementById(targetId)?.focus({ preventScroll: true });
+      },
+      { injector: this.injector },
+    );
   }
 
   private scrollToTop(): void {

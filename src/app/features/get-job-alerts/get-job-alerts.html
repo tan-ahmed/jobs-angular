@@ -40,6 +40,17 @@
           Fields marked with an asterisk (*) are required
         </p>
 
+        @if (showValidationHint()) {
+          <z-alert
+            id="form-validation-alert"
+            class="mb-6"
+            zType="destructive"
+            zRole="alert"
+            zTitle="Please check the form"
+            zDescription="Some required fields need your attention before we can create the alert."
+          />
+        }
+
         <form class="w-full" novalidate (submit)="onSubmit($event)">
           <div z-field-group>
             <div z-field>
