@@ -69,7 +69,7 @@
             placeholder="City or postcode"
             autocomplete="address-level2"
             [value]="location()"
-            (input)="location.set($any($event.target).value)"
+            (input)="onLocationChange($any($event.target).value)"
           />
         </z-input-group>
 
@@ -79,6 +79,7 @@
             id="hero-radius"
             class="w-full"
             zPlaceholder="Search radius"
+            [zDisabled]="!hasLocation()"
             [zValue]="radius()"
             (zValueChange)="onRadiusChange($event)"
           >

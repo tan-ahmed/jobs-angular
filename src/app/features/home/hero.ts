@@ -1,5 +1,5 @@
 import { NgOptimizedImage } from '@angular/common';
-import { Component, signal } from '@angular/core';
+import { Component, computed, signal } from '@angular/core';
 
 import { NgIcon, provideIcons } from '@ng-icons/core';
 import { lucideMapPin, lucideSearch } from '@ng-icons/lucide';
@@ -36,6 +36,15 @@ export class Hero {
   protected readonly keyword = signal('');
   protected readonly location = signal('');
   protected readonly radius = signal('0');
+
+  protected readonly hasLocation = computed(() => this.location().trim().length > 0);
+
+  protected onLocationChange(value: string): void {
+    this.location.set(value);
+    if (!value.trim()) {
+      this.radius.set('0');
+    }
+  }
 
   protected onRadiusChange(value: string | string[]): void {
     this.radius.set(Array.isArray(value) ? (value[0] ?? '0') : value);
