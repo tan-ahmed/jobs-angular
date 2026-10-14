@@ -19,12 +19,6 @@ const RADII = [
 
 const POPULAR = ['Lecturer', 'Postdoctoral', 'Research Fellow', 'Professor'] as const;
 
-const STATS = [
-  { value: '2,600+', label: 'Live vacancies' },
-  { value: '4,700+', label: 'Employers' },
-  { value: '160+', label: 'Countries' },
-] as const;
-
 @Component({
   selector: 'app-hero',
   imports: [
@@ -41,7 +35,6 @@ const STATS = [
 export class Hero {
   protected readonly radii = RADII;
   protected readonly popular = POPULAR;
-  protected readonly stats = STATS;
 
   protected readonly keyword = signal('');
   protected readonly location = signal('');

@@ -119,15 +119,5 @@
         </span>
       </div>
     </form>
-
-    <dl class="mt-10 flex flex-wrap gap-x-10 gap-y-4">
-      @for (stat of stats; track stat.label) {
-        <div class="flex items-baseline gap-2">
-          <dt class="sr-only">{{ stat.label }}</dt>
-          <dd class="font-serif text-2xl font-semibold text-brand-foreground">{{ stat.value }}</dd>
-          <span class="text-sm text-brand-foreground/70">{{ stat.label }}</span>
-        </div>
-      }
-    </dl>
   </div>
 </section>
