@@ -1,0 +1,61 @@
+<section id="advice" class="bg-muted">
+  <div class="mx-auto max-w-7xl px-4 py-12 sm:px-6 sm:py-16 lg:px-8 lg:py-24">
+    <div class="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between sm:gap-6">
+      <div class="max-w-xl">
+        <p class="text-sm font-semibold tracking-widest text-primary uppercase">Career advice</p>
+        <h2
+          class="mt-2 font-serif text-2xl font-semibold tracking-tight text-balance sm:text-3xl lg:text-4xl"
+        >
+          Guidance for every career stage
+        </h2>
+      </div>
+      <a
+        href="#advice"
+        class="inline-flex shrink-0 items-center gap-2 self-start text-sm font-semibold text-primary underline-offset-4 hover:underline sm:self-auto"
+      >
+        Read all articles
+        <ng-icon name="lucideArrowRight" class="size-4" />
+      </a>
+    </div>
+
+    <div class="mt-8 grid gap-6 sm:mt-10 md:grid-cols-2 lg:grid-cols-3">
+      @for (article of articles; track article.title) {
+        <a
+          href="#advice"
+          class="group flex flex-col overflow-hidden rounded-2xl border border-border bg-card transition-shadow hover:shadow-lg hover:shadow-brand/5"
+        >
+          <div class="relative aspect-[16/10] overflow-hidden">
+            <img
+              [ngSrc]="article.image"
+              [alt]="article.title"
+              fill
+              class="object-cover transition-transform duration-500 group-hover:scale-105"
+              sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
+            />
+            <span
+              class="absolute top-4 left-4 rounded-full bg-background/90 px-3 py-1 text-xs font-semibold tracking-wide text-primary uppercase backdrop-blur"
+            >
+              {{ article.kicker }}
+            </span>
+          </div>
+          <div class="flex flex-1 flex-col p-5 sm:p-6">
+            <h3
+              class="font-serif text-xl leading-snug font-semibold text-balance transition-colors group-hover:text-primary"
+            >
+              {{ article.title }}
+            </h3>
+            <p class="mt-2 flex-1 text-sm leading-relaxed text-muted-foreground text-pretty">
+              {{ article.excerpt }}
+            </p>
+            <span
+              class="mt-4 inline-flex items-center gap-1.5 text-xs font-medium text-muted-foreground"
+            >
+              <ng-icon name="lucideClock" class="size-3.5" />
+              {{ article.minutes }} min read
+            </span>
+          </div>
+        </a>
+      }
+    </div>
+  </div>
+</section>

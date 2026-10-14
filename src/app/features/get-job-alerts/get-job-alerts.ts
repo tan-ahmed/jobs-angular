@@ -2,7 +2,6 @@ import { Component, signal } from '@angular/core';
 import { email, form, FormField, required, submit } from '@angular/forms/signals';
 
 import { ZardButtonComponent } from '@/shared/components/button';
-import { ZardCheckboxComponent } from '@/shared/components/checkbox';
 import { ZardFieldImports } from '@/shared/components/field/field.imports';
 import { ZardInputComponent } from '@/shared/components/input';
 import { ZardSelectImports } from '@/shared/components/select/select.imports';
@@ -14,7 +13,6 @@ interface JobAlertModel {
   jobTitle: string;
   location: string;
   searchRadius: string;
-  includeRemote: boolean;
   frequency: AlertFrequency;
 }
 
@@ -23,7 +21,6 @@ interface JobAlertModel {
   imports: [
     FormField,
     ZardButtonComponent,
-    ZardCheckboxComponent,
     ZardInputComponent,
     ...ZardFieldImports,
     ...ZardSelectImports,
@@ -56,7 +53,6 @@ export class GetJobAlerts {
     jobTitle: '',
     location: '',
     searchRadius: '30',
-    includeRemote: false,
     frequency: 'daily',
   });
 

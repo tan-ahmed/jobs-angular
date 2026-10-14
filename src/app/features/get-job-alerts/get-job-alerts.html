@@ -1,126 +1,137 @@
-<main class="mx-auto w-full max-w-xl p-6 md:p-10">
-  <header class="mb-8 space-y-3">
-    <h1>Create a job alert</h1>
-    <p class="font-size-body text-muted-foreground">
-      Be the first to apply — get daily alerts with the latest jobs sent directly to your inbox.
-    </p>
-    <p class="font-size-small text-muted-foreground">
-      Fields marked with an asterisk (*) are required
-    </p>
-  </header>
+<main class="bg-background">
+  <div class="mx-auto w-full max-w-2xl px-4 py-8 sm:px-6 sm:py-12 lg:py-16">
+    <header class="mb-6 space-y-2 sm:mb-8">
+      <p class="text-sm font-semibold tracking-widest text-primary uppercase">Jobs by email</p>
+      <h1 class="font-serif text-3xl font-semibold tracking-tight text-balance sm:text-4xl">
+        Create a job alert
+      </h1>
+      <p class="max-w-xl text-muted-foreground text-pretty">
+        Be the first to apply — get alerts with the latest jobs sent directly to your inbox.
+      </p>
+    </header>
 
-  <form class="w-full" novalidate (submit)="onSubmit($event)">
-    <div z-field-group>
-      <div z-field>
-        <label z-field-label for="email">
-          What is your email address?
-          <span class="text-negative-action" aria-hidden="true">*</span>
-        </label>
-        <input
-          z-input
-          id="email"
-          type="email"
-          autocomplete="email"
-          [formField]="alertForm.email"
-          [attr.aria-required]="true"
-          [attr.aria-invalid]="alertForm.email().invalid() && alertForm.email().touched() ? true : null"
-          [attr.aria-describedby]="
-            alertForm.email().invalid() && alertForm.email().touched() ? 'email-error' : null
-          "
-        />
-        @if (alertForm.email().invalid() && alertForm.email().touched()) {
-          <z-field-error id="email-error" [zErrors]="alertForm.email().errors()" />
-        }
-      </div>
-
-      <div z-field>
-        <label z-field-label for="job-title">What job title are you currently seeking?</label>
-        <input
-          z-input
-          id="job-title"
-          type="text"
-          placeholder="e.g. Web Designer"
-          autocomplete="organization-title"
-          [formField]="alertForm.jobTitle"
-        />
-      </div>
-
-      <div z-field>
-        <label z-field-label for="location">In which location would you prefer to work?</label>
-        <input
-          z-input
-          id="location"
-          type="text"
-          placeholder="e.g. Manchester, Homeworking"
-          autocomplete="address-level2"
-          [formField]="alertForm.location"
-        />
-      </div>
-
-      <div z-field>
-        <label z-field-label for="search-radius">
-          How far from this location would you like to search?
-        </label>
-        <z-select
-          id="search-radius"
-          zPlaceholder="Please select"
-          [formField]="alertForm.searchRadius"
-        >
-          @for (miles of radiusOptions; track miles) {
-            <z-select-item [zValue]="miles">Within {{ miles }} miles</z-select-item>
-          }
-        </z-select>
-      </div>
-
-      <div z-field>
-        <span z-checkbox [formField]="alertForm.includeRemote">
-          Include working from home jobs
-        </span>
-      </div>
-
-      <fieldset z-field-set>
-        <legend z-field-legend>
-          How often should we send you jobs?
-          <span class="text-negative-action" aria-hidden="true">*</span>
-        </legend>
-        <div z-field-group class="gap-3">
-          <div z-field zOrientation="horizontal" class="items-center gap-2">
-            <input
-              id="frequency-daily"
-              type="radio"
-              value="daily"
-              [formField]="alertForm.frequency"
-            />
-            <label z-field-label for="frequency-daily">Daily</label>
-          </div>
-          <div z-field zOrientation="horizontal" class="items-center gap-2">
-            <input
-              id="frequency-weekly"
-              type="radio"
-              value="weekly"
-              [formField]="alertForm.frequency"
-            />
-            <label z-field-label for="frequency-weekly">Weekly</label>
-          </div>
-        </div>
-        @if (alertForm.frequency().invalid() && alertForm.frequency().touched()) {
-          <z-field-error [zErrors]="alertForm.frequency().errors()" />
-        }
-      </fieldset>
-
-      <p z-field-description>
-        When you create this job alert we will email you a selection of jobs matching your criteria.
-        Our terms and conditions and privacy policy apply to this service and you can unsubscribe at
-        any time.
+    <div
+      class="rounded-2xl border border-border bg-card p-5 text-card-foreground shadow-sm sm:p-8 sm:shadow-md"
+    >
+      <p class="mb-6 font-size-small text-muted-foreground">
+        Fields marked with an asterisk (*) are required
       </p>
 
-      @if (submitted()) {
-        <p class="text-sm" role="status">Thanks — your job alert has been created (demo only).</p>
-      }
+      <form class="w-full" novalidate (submit)="onSubmit($event)">
+        <div z-field-group>
+          <div z-field>
+            <label z-field-label for="email">
+              What is your email address?
+              <span class="text-negative-action" aria-hidden="true">*</span>
+            </label>
+            <input
+              z-input
+              id="email"
+              type="email"
+              autocomplete="email"
+              [formField]="alertForm.email"
+              [attr.aria-required]="true"
+              [attr.aria-invalid]="
+                alertForm.email().invalid() && alertForm.email().touched() ? true : null
+              "
+              [attr.aria-describedby]="
+                alertForm.email().invalid() && alertForm.email().touched() ? 'email-error' : null
+              "
+            />
+            @if (alertForm.email().invalid() && alertForm.email().touched()) {
+              <z-field-error id="email-error" [zErrors]="alertForm.email().errors()" />
+            }
+          </div>
 
-      <div z-field zOrientation="horizontal" class="justify-end">
-        <button z-button zType="success" type="submit">Send me new jobs</button>
-      </div>
+          <div z-field>
+            <label z-field-label for="job-title">What job title are you currently seeking?</label>
+            <input
+              z-input
+              id="job-title"
+              type="text"
+              placeholder="e.g. Web Designer"
+              autocomplete="organization-title"
+              [formField]="alertForm.jobTitle"
+            />
+          </div>
+
+          <div z-field>
+            <label z-field-label for="location">In which location would you prefer to work?</label>
+            <input
+              z-input
+              id="location"
+              type="text"
+              placeholder="e.g. Manchester, Homeworking"
+              autocomplete="address-level2"
+              [formField]="alertForm.location"
+            />
+          </div>
+
+          <div z-field>
+            <label z-field-label for="search-radius">
+              How far from this location would you like to search?
+            </label>
+            <z-select
+              id="search-radius"
+              zPlaceholder="Please select"
+              [formField]="alertForm.searchRadius"
+            >
+              @for (miles of radiusOptions; track miles) {
+                <z-select-item [zValue]="miles">Within {{ miles }} miles</z-select-item>
+              }
+            </z-select>
+          </div>
+
+          <fieldset z-field-set>
+            <legend z-field-legend>
+              How often should we send you jobs?
+              <span class="text-negative-action" aria-hidden="true">*</span>
+            </legend>
+            <div z-field-group class="gap-3">
+              <div z-field zOrientation="horizontal" class="items-center gap-2">
+                <input
+                  id="frequency-daily"
+                  type="radio"
+                  value="daily"
+                  [formField]="alertForm.frequency"
+                />
+                <label z-field-label for="frequency-daily">Daily</label>
+              </div>
+              <div z-field zOrientation="horizontal" class="items-center gap-2">
+                <input
+                  id="frequency-weekly"
+                  type="radio"
+                  value="weekly"
+                  [formField]="alertForm.frequency"
+                />
+                <label z-field-label for="frequency-weekly">Weekly</label>
+              </div>
+            </div>
+            @if (alertForm.frequency().invalid() && alertForm.frequency().touched()) {
+              <z-field-error [zErrors]="alertForm.frequency().errors()" />
+            }
+          </fieldset>
+
+          <p z-field-description>
+            When you create this job alert we will email you a selection of jobs matching your
+            criteria. Our terms and conditions and privacy policy apply to this service and you can
+            unsubscribe at any time.
+          </p>
+
+          @if (submitted()) {
+            <p
+              class="rounded-xl bg-secondary px-4 py-3 text-sm text-secondary-foreground"
+              role="status"
+            >
+              Thanks — your job alert has been created (demo only).
+            </p>
+          }
+
+          <div z-field zOrientation="horizontal" class="justify-stretch sm:justify-end">
+            <button z-button type="submit" class="w-full sm:w-auto">Send me new jobs</button>
+          </div>
+        </div>
+      </form>
     </div>
-  </form>
+  </div>
 </main>

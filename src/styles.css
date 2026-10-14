@@ -7,36 +7,43 @@
 
 :root {
   --radius: 0.625rem;
-  --background: oklch(1 0 0);
-  --foreground: oklch(0.145 0 0);
+  /* Warm paper page surface — cards stay pure white for contrast */
+  --background: oklch(0.985 0.006 85);
+  --foreground: oklch(0.337 0.0821 260.52); /* brand blue ink */
   --card: oklch(1 0 0);
-  --card-foreground: oklch(0.145 0 0);
+  --card-foreground: oklch(0.337 0.0821 260.52);
   --popover: oklch(1 0 0);
-  --popover-foreground: oklch(0.145 0 0);
-  --primary: oklch(0.35 0.15 285);
+  --popover-foreground: oklch(0.337 0.0821 260.52);
+  /* Primary CTA — jobs.ac.uk magenta */
+  --primary: oklch(0.5991 0.2369 358.51); /* #e3137e */
   --primary-foreground: oklch(1 0 0);
-  --default-primary: oklch(0.35 0.15 285);
+  --default-primary: oklch(0.5991 0.2369 358.51);
   --default-primary-foreground: oklch(1 0 0);
-  --secondary: oklch(0.5 0.15 240);
-  --secondary-foreground: oklch(1 0 0);
-  --muted: oklch(0.97 0 0);
-  --muted-foreground: oklch(0.556 0 0);
-  --accent: oklch(0.97 0 0);
-  --accent-foreground: oklch(0.205 0 0);
+  /* Brand navy (hero / nav) */
+  --brand: oklch(0.337 0.0821 260.52); /* #1d3661 */
+  --brand-foreground: oklch(1 0 0);
+  /* Logo teal accent */
+  --brand-teal: oklch(0.7124 0.1117 199.43); /* #2db7bd */
+  --secondary: oklch(0.95 0.01 260);
+  --secondary-foreground: oklch(0.337 0.0821 260.52);
+  --muted: oklch(0.955 0.008 255);
+  --muted-foreground: oklch(0.5 0.02 260);
+  --accent: oklch(0.5991 0.2369 358.51); /* #e3137e */
+  --accent-foreground: oklch(1 0 0);
   --destructive: oklch(0.5734 0.235 29.2);
   --destructive-foreground: oklch(0.985 0 0);
-  --border: oklch(0.922 0 0);
-  --input: oklch(0.922 0 0);
-  --ring: oklch(0.5347 0.136 249.8); /* #1d70b8 */
+  --border: oklch(0.9 0.012 260);
+  --input: oklch(0.9 0.012 260);
+  --ring: oklch(0.5991 0.2369 358.51); /* #e3137e */
 
   /* WEG style guide */
-  --loading: oklch(0.6907 0.1346 285.24); /* #948EEB */
-  --weg-accent-1: oklch(0.6907 0.1346 285.24); /* #948EEB */
+  --loading: oklch(0.7124 0.1117 199.43); /* #2db7bd */
+  --weg-accent-1: oklch(0.7124 0.1117 199.43);
   --text: oklch(0.3211 0 0); /* #333333 */
   --text-secondary: oklch(1 0 0);
-  --link: oklch(0.448 0.118 264.05); /* #325195 */
-  --link-hover: oklch(0.251 0.109 264.7); /* #003078 */
-  --link-visited: oklch(0.251 0.109 264.7);
+  --link: oklch(0.337 0.0821 260.52); /* #1d3661 */
+  --link-hover: oklch(0.28 0.08 260);
+  --link-visited: oklch(0.28 0.08 260);
   --link-active: oklch(0.165 0.001 285);
   --input-field: oklch(0.968 0 0); /* #f6f6f6 */
   --border-form: oklch(0.5452 0 0); /* #707070 */
@@ -64,14 +71,14 @@
   --font-size-small: 0.875rem;
   --line-height-small: 1.25rem;
 
-  --sidebar: oklch(0.985 0 0);
-  --sidebar-foreground: oklch(0.145 0 0);
-  --sidebar-primary: oklch(0.35 0.15 285);
+  --sidebar: oklch(0.985 0.006 85);
+  --sidebar-foreground: oklch(0.337 0.0821 260.52);
+  --sidebar-primary: oklch(0.5991 0.2369 358.51);
   --sidebar-primary-foreground: oklch(1 0 0);
-  --sidebar-accent: oklch(0.97 0 0);
-  --sidebar-accent-foreground: oklch(0.205 0 0);
-  --sidebar-border: oklch(0.922 0 0);
-  --sidebar-ring: oklch(0.5347 0.136 249.8);
+  --sidebar-accent: oklch(0.95 0.015 260);
+  --sidebar-accent-foreground: oklch(0.337 0.0821 260.52);
+  --sidebar-border: oklch(0.9 0.012 260);
+  --sidebar-ring: oklch(0.5991 0.2369 358.51);
 }
 
 @media (width >= 48rem) {
@@ -113,33 +120,36 @@
 }
 
 .dark {
-  --background: oklch(0.145 0 0);
+  --background: oklch(0.2 0.04 260);
   --foreground: oklch(0.985 0 0);
-  --card: oklch(0.205 0 0);
+  --card: oklch(0.25 0.04 260);
   --card-foreground: oklch(0.985 0 0);
-  --popover: oklch(0.205 0 0);
+  --popover: oklch(0.25 0.04 260);
   --popover-foreground: oklch(0.985 0 0);
-  --primary: oklch(0.6907 0.1346 285.24);
-  --primary-foreground: oklch(0.205 0 0);
-  --secondary: oklch(0.269 0 0);
+  --primary: oklch(0.65 0.22 358);
+  --primary-foreground: oklch(1 0 0);
+  --brand: oklch(0.4 0.07 260);
+  --brand-foreground: oklch(1 0 0);
+  --brand-teal: oklch(0.75 0.11 199);
+  --secondary: oklch(0.3 0.03 260);
   --secondary-foreground: oklch(0.985 0 0);
-  --muted: oklch(0.269 0 0);
+  --muted: oklch(0.3 0.03 260);
   --muted-foreground: oklch(0.708 0 0);
-  --accent: oklch(0.269 0 0);
-  --accent-foreground: oklch(0.985 0 0);
+  --accent: oklch(0.65 0.22 358);
+  --accent-foreground: oklch(1 0 0);
   --destructive: oklch(0.704 0.191 22.216);
   --destructive-foreground: oklch(0.205 0 0);
   --border: oklch(1 0 0 / 10%);
   --input: oklch(1 0 0 / 15%);
-  --ring: oklch(0.556 0 0);
-  --sidebar: oklch(0.205 0 0);
+  --ring: oklch(0.65 0.22 358);
+  --sidebar: oklch(0.25 0.04 260);
   --sidebar-foreground: oklch(0.985 0 0);
-  --sidebar-primary: oklch(0.6907 0.1346 285.24);
+  --sidebar-primary: oklch(0.65 0.22 358);
   --sidebar-primary-foreground: oklch(0.985 0 0);
-  --sidebar-accent: oklch(0.269 0 0);
+  --sidebar-accent: oklch(0.3 0.03 260);
   --sidebar-accent-foreground: oklch(0.985 0 0);
   --sidebar-border: oklch(1 0 0 / 10%);
-  --sidebar-ring: oklch(0.556 0 0);
+  --sidebar-ring: oklch(0.65 0.22 358);
 }
 
 @theme inline {
@@ -163,12 +173,19 @@
   --color-popover-foreground: var(--popover-foreground);
   --color-primary: var(--primary);
   --color-primary-foreground: var(--primary-foreground);
+  --color-brand: var(--brand);
+  --color-brand-foreground: var(--brand-foreground);
+  --color-brand-teal: var(--brand-teal);
   --color-secondary: var(--secondary);
   --color-secondary-foreground: var(--secondary-foreground);
   --color-muted: var(--muted);
   --color-muted-foreground: var(--muted-foreground);
   --color-accent: var(--accent);
   --color-accent-foreground: var(--accent-foreground);
+
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji',
+    'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+  --font-serif: var(--font-fraunces), ui-serif, Georgia, 'Times New Roman', serif;
   --color-destructive: var(--destructive);
   --color-destructive-foreground: var(--destructive-foreground);
   --color-border: var(--border);
@@ -217,13 +234,10 @@
   }
 
   body {
-    @apply bg-background;
+    @apply bg-background font-sans antialiased;
     font-size: var(--font-size-body);
     line-height: var(--line-height-body);
     color: var(--text);
-    font-family:
-      'Open Sans', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
-      'Segoe UI Symbol', 'Noto Color Emoji';
   }
 
   h1,
@@ -232,7 +246,7 @@
   h4,
   h5,
   h6 {
-    font-family: 'General Sans', ui-sans-serif, system-ui, sans-serif;
+    font-family: var(--font-serif);
   }
 
   h1,

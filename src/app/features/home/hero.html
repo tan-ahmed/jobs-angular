@@ -1,0 +1,133 @@
+<section id="top" class="relative overflow-hidden bg-brand text-brand-foreground">
+  <div class="absolute inset-0">
+    <img
+      ngSrc="/images/hero-campus.png"
+      alt=""
+      fill
+      priority
+      class="object-cover opacity-20"
+      sizes="100vw"
+    />
+    <div
+      class="absolute inset-0 bg-gradient-to-br from-brand via-brand/95 to-brand/80"
+      aria-hidden="true"
+    ></div>
+  </div>
+
+  <div class="relative mx-auto max-w-7xl px-4 pt-16 pb-14 sm:px-6 lg:px-8 lg:pt-24 lg:pb-20">
+    <div class="max-w-3xl">
+      <p
+        class="mb-4 inline-flex items-center gap-2 rounded-full border border-brand-foreground/20 px-3 py-1 text-xs font-medium tracking-widest text-brand-foreground/80 uppercase"
+      >
+        The UK's leading academic &amp; research jobs board
+      </p>
+      <h1
+        class="font-serif text-4xl leading-[1.05] font-semibold tracking-tight text-balance sm:text-5xl lg:text-6xl"
+      >
+        Great jobs for
+        <span class="text-brand-teal italic">bright</span>
+        people
+      </h1>
+      <p class="mt-5 max-w-xl text-lg leading-relaxed text-pretty text-brand-foreground/80">
+        Search academic, research, science and professional roles at universities and institutions
+        across the UK and around the world.
+      </p>
+    </div>
+
+    <form
+      class="mt-10 rounded-2xl bg-card p-3 text-card-foreground shadow-2xl shadow-brand/40 ring-1 ring-black/5 sm:p-4"
+      (submit)="onSearch($event)"
+    >
+      <div class="grid gap-3 md:grid-cols-[1.4fr_1fr_auto]">
+        <z-input-group
+          class="h-12 rounded-xl border-2 border-border bg-background md:h-14"
+        >
+          <z-input-group-addon>
+            <ng-icon name="lucideSearch" class="text-muted-foreground" />
+          </z-input-group-addon>
+          <label class="sr-only" for="hero-keyword">Search jobs by keyword</label>
+          <input
+            z-input
+            id="hero-keyword"
+            type="search"
+            name="keyword"
+            placeholder="Job title, keyword or employer"
+            autocomplete="off"
+            [value]="keyword()"
+            (input)="keyword.set($any($event.target).value)"
+          />
+        </z-input-group>
+
+        <z-input-group
+          class="h-12 rounded-xl border-2 border-border bg-background md:h-14"
+        >
+          <z-input-group-addon>
+            <ng-icon name="lucideMapPin" class="text-muted-foreground" />
+          </z-input-group-addon>
+          <label class="sr-only" for="hero-location">Location</label>
+          <input
+            z-input
+            id="hero-location"
+            type="text"
+            name="location"
+            placeholder="City or postcode"
+            autocomplete="address-level2"
+            [value]="location()"
+            (input)="location.set($any($event.target).value)"
+          />
+        </z-input-group>
+
+        <button
+          z-button
+          zSize="lg"
+          type="submit"
+          class="h-12 gap-2 px-8 text-base font-semibold md:h-14"
+        >
+          <ng-icon name="lucideSearch" />
+          Search
+        </button>
+      </div>
+
+      <div class="mt-3 flex flex-wrap items-center gap-x-4 gap-y-2 px-1">
+        <div class="min-w-44">
+          <label class="sr-only" for="hero-radius">Search radius</label>
+          <z-select
+            id="hero-radius"
+            class="w-full"
+            zPlaceholder="Search radius"
+            [zValue]="radius()"
+            (zValueChange)="onRadiusChange($event)"
+          >
+            @for (option of radii; track option.value) {
+              <z-select-item [zValue]="option.value">{{ option.label }}</z-select-item>
+            }
+          </z-select>
+        </div>
+        <span class="text-sm text-muted-foreground">
+          Popular:
+          @for (term of popular; track term; let last = $last) {
+            <button
+              type="button"
+              class="font-medium text-foreground/80 underline-offset-4 hover:text-primary hover:underline"
+              (click)="setPopular(term)"
+            >
+              {{ term }}@if (!last) {
+                ,&nbsp;
+              }
+            </button>
+          }
+        </span>
+      </div>
+    </form>
+
+    <dl class="mt-10 flex flex-wrap gap-x-10 gap-y-4">
+      @for (stat of stats; track stat.label) {
+        <div class="flex items-baseline gap-2">
+          <dt class="sr-only">{{ stat.label }}</dt>
+          <dd class="font-serif text-2xl font-semibold text-brand-foreground">{{ stat.value }}</dd>
+          <span class="text-sm text-brand-foreground/70">{{ stat.label }}</span>
+        </div>
+      }
+    </dl>
+  </div>
+</section>

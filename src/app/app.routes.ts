@@ -4,7 +4,7 @@ export const routes: Routes = [
   {
     path: '',
     pathMatch: 'full',
-    redirectTo: 'get-job-alerts',
+    loadComponent: () => import('./features/home/home').then(m => m.Home),
   },
   {
     path: 'get-job-alerts',

@@ -1,0 +1,65 @@
+<section id="browse" class="bg-background">
+  <div class="mx-auto max-w-7xl px-4 py-12 sm:px-6 sm:py-16 lg:px-8 lg:py-24">
+  <div class="flex flex-col gap-6">
+    <div class="max-w-xl">
+      <p class="text-sm font-semibold tracking-widest text-primary uppercase">Browse by field</p>
+      <h2 class="mt-2 font-serif text-2xl font-semibold tracking-tight text-balance sm:text-3xl lg:text-4xl">
+        Find your discipline
+      </h2>
+      <p class="mt-3 text-muted-foreground text-pretty">
+        Explore live vacancies across every academic field, professional service and doctoral
+        programme.
+      </p>
+    </div>
+
+    <div
+      role="tablist"
+      aria-label="Job categories"
+      class="-mx-4 flex gap-1 overflow-x-auto px-4 pb-1 sm:mx-0 sm:flex-wrap sm:overflow-visible sm:rounded-xl sm:border sm:border-border sm:bg-card sm:p-1 sm:px-1"
+    >
+      @for (tab of tabs; track tab.id) {
+        <button
+          type="button"
+          role="tab"
+          class="shrink-0 rounded-full px-4 py-2 text-sm font-medium transition-colors sm:rounded-lg"
+          [class]="
+            activeId() === tab.id
+              ? 'shrink-0 rounded-full px-4 py-2 text-sm font-medium transition-colors sm:rounded-lg bg-primary text-primary-foreground'
+              : 'shrink-0 rounded-full px-4 py-2 text-sm font-medium transition-colors sm:rounded-lg bg-secondary text-foreground/70 hover:text-primary sm:bg-transparent'
+          "
+          [attr.aria-selected]="activeId() === tab.id"
+          (click)="selectTab(tab.id)"
+        >
+          {{ tab.label }}
+        </button>
+      }
+    </div>
+  </div>
+
+  <ul
+    class="mt-8 grid gap-px overflow-hidden rounded-2xl border border-border bg-border sm:mt-10 sm:grid-cols-2 lg:grid-cols-3"
+  >
+    @for (discipline of current().data; track discipline.name) {
+      <li>
+        <a
+          href="#browse"
+          class="group flex h-full items-center justify-between gap-4 bg-card px-4 py-4 transition-colors hover:bg-secondary sm:px-5"
+        >
+          <span class="flex items-center gap-2 font-medium text-foreground">
+            {{ discipline.name }}
+            <ng-icon
+              name="lucideArrowUpRight"
+              class="size-4 -translate-x-1 text-primary opacity-0 transition-all group-hover:translate-x-0 group-hover:opacity-100"
+            />
+          </span>
+          <span
+            class="shrink-0 rounded-full bg-secondary px-2.5 py-0.5 text-sm font-semibold text-foreground/70 tabular-nums group-hover:bg-primary group-hover:text-primary-foreground"
+          >
+            {{ discipline.count }}
+          </span>
+        </a>
+      </li>
+    }
+  </ul>
+  </div>
+</section>
