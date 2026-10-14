@@ -9,9 +9,9 @@ const STATS = [
 @Component({
   selector: 'app-trust-stats',
   template: `
-    <section aria-label="Platform stats" class="border-b border-border bg-secondary/40">
+    <section aria-label="Platform stats" class="bg-background">
       <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <dl class="flex flex-wrap items-center justify-center gap-x-10 gap-y-3 py-5 sm:py-6">
+        <dl class="flex flex-wrap items-center justify-center gap-x-10 gap-y-3 pt-8 pb-2 sm:pt-10 sm:pb-4">
           @for (stat of stats; track stat.label) {
             <div class="flex items-baseline gap-2">
               <dt class="sr-only">{{ stat.label }}</dt>
