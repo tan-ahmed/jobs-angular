@@ -4,28 +4,29 @@ import { mergeClasses } from '@/shared/utils/merge-classes';
 
 export const inputGroupVariants = cva(
   mergeClasses(
-    'group/input-group relative flex h-8 w-full min-w-0 items-center rounded-lg border border-input transition-colors outline-none',
-    'has-disabled:bg-input/50 has-disabled:opacity-50',
+    'group/input-group relative flex box-border h-11 w-full min-w-0 items-center gap-2 rounded-xl border-2 border-border-form bg-input-field px-3 py-2 shadow-xs transition-[color,box-shadow] outline-none md:h-12',
     'has-[[data-slot=input-group-control]:focus-visible]:border-ring has-[[data-slot=input-group-control]:focus-visible]:ring-3 has-[[data-slot=input-group-control]:focus-visible]:ring-ring/50',
     'has-[[data-slot][aria-invalid=true]]:border-destructive has-[[data-slot][aria-invalid=true]]:ring-3 has-[[data-slot][aria-invalid=true]]:ring-destructive/20',
+    'has-[[data-slot=input-group-control]:disabled]:pointer-events-none has-[[data-slot=input-group-control]:disabled]:cursor-not-allowed has-[[data-slot=input-group-control]:disabled]:bg-[#E9ECEF] has-[[data-slot=input-group-control]:disabled]:opacity-50',
     'has-[>[data-align=block-end]]:h-auto has-[>[data-align=block-end]]:flex-col has-[>[data-align=block-start]]:h-auto has-[>[data-align=block-start]]:flex-col has-[>textarea]:h-auto',
-    'dark:bg-input/30 dark:has-disabled:bg-input/80 dark:has-[[data-slot][aria-invalid=true]]:ring-destructive/40',
     'has-[>[data-align=block-end]]:[&>input]:pt-3 has-[>[data-align=block-start]]:[&>input]:pb-3',
-    'has-[>[data-align=inline-end]]:[&>input]:pr-1.5 has-[>[data-align=inline-start]]:[&>input]:pl-1.5',
+    'has-[>[data-align=inline-end]]:[&>input]:pr-0 has-[>[data-align=inline-start]]:[&>input]:pl-0',
     // Input/textarea overrides when used as input-group-control
-    '*:data-[slot=input-group-control]:flex-1 *:data-[slot=input-group-control]:rounded-none *:data-[slot=input-group-control]:border-0! *:data-[slot=input-group-control]:bg-transparent! *:data-[slot=input-group-control]:shadow-none *:data-[slot=input-group-control]:ring-0!',
+    '*:data-[slot=input-group-control]:h-full *:data-[slot=input-group-control]:min-h-0 *:data-[slot=input-group-control]:flex-1 *:data-[slot=input-group-control]:rounded-none *:data-[slot=input-group-control]:border-0! *:data-[slot=input-group-control]:bg-transparent! *:data-[slot=input-group-control]:px-0 *:data-[slot=input-group-control]:py-0 *:data-[slot=input-group-control]:shadow-none *:data-[slot=input-group-control]:ring-0!',
     '[&>[data-slot=input-group-control]:focus-visible]:ring-0! [&>[data-slot=input-group-control][aria-invalid=true]]:ring-0!',
     '[&>textarea[data-slot=input-group-control]]:resize-none [&>textarea[data-slot=input-group-control]]:py-2',
   ),
 );
 
 export const inputGroupAddonVariants = cva(
-  "flex h-auto cursor-text items-center justify-center gap-2 py-1.5 text-sm font-medium text-muted-foreground select-none group-data-[disabled=true]/input-group:opacity-50 [&>kbd]:rounded-[calc(var(--radius)-5px)] [&>svg:not([class*='size-'])]:size-4",
+  "flex shrink-0 cursor-text items-center justify-center gap-2 self-center text-sm font-medium text-muted-foreground select-none group-data-[disabled=true]/input-group:opacity-50 [&>kbd]:rounded-[calc(var(--radius)-5px)] [&>svg:not([class*='size-'])]:size-4",
   {
     variants: {
       zAlign: {
-        'inline-start': 'order-first ps-2 has-[>button]:ms-[-0.3rem] has-[>kbd]:ms-[-0.15rem]',
-        'inline-end': 'order-last pe-2 has-[>button]:me-[-0.3rem] has-[>kbd]:me-[-0.15rem]',
+        'inline-start':
+          'order-first -ms-1 ps-0 has-[>button]:-ms-1 has-[>kbd]:ms-[-0.15rem]',
+        'inline-end':
+          'order-last -me-1 pe-0 has-[>button]:-me-1 has-[>kbd]:me-[-0.15rem]',
         'block-start':
           'order-first w-full justify-start px-2.5 pt-2 group-has-[>input]/input-group:pt-2 [.border-b]:pb-2',
         'block-end': 'order-last w-full justify-start px-2.5 pb-2 group-has-[>input]/input-group:pb-2 [.border-t]:pt-2',
