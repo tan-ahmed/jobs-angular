@@ -17,8 +17,6 @@ const RADII = [
   { value: '50', label: 'Within 50 miles' },
 ] as const;
 
-const POPULAR = ['Lecturer', 'Postdoctoral', 'Research Fellow', 'Professor'] as const;
-
 @Component({
   selector: 'app-hero',
   imports: [
@@ -34,15 +32,10 @@ const POPULAR = ['Lecturer', 'Postdoctoral', 'Research Fellow', 'Professor'] as 
 })
 export class Hero {
   protected readonly radii = RADII;
-  protected readonly popular = POPULAR;
 
   protected readonly keyword = signal('');
   protected readonly location = signal('');
   protected readonly radius = signal('0');
-
-  protected setPopular(term: string): void {
-    this.keyword.set(term);
-  }
 
   protected onRadiusChange(value: string | string[]): void {
     this.radius.set(Array.isArray(value) ? (value[0] ?? '0') : value);
